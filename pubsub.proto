@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pubsub;
+
+option go_package = "pubsubservice/grpc/pubsub;pubsub";
+
+service PubSub {
+  rpc Publish (PublishRequest) returns (PublishResponse) {}
+  rpc Subscribe (SubscribeRequest) returns (stream SubscribeResponse) {}
+}
+
+message PublishRequest {
+  string subject = 1;
+  string message = 2;
+}
+
+message PublishResponse {
+  bool success = 1;
+}
+
+message SubscribeRequest {
+  string subject = 1;
+}
+
+message SubscribeResponse {
+  string message = 1;
+}
